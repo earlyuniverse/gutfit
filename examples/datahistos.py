@@ -49,7 +49,7 @@ if __name__=="__main__":
         D.append(data)
         T.append(theo)
 
-    fig, axes = plt.subplots(figsize=(10, 10), sharex=True, sharey=True, ncols=3, nrows=3)
+    fig, axes = plt.subplots(figsize=(10, 10), sharex=False, sharey=False, ncols=3, nrows=3)
     for i in range(3):
         for j in range(3):
             if i<j:
@@ -57,8 +57,10 @@ if __name__=="__main__":
             else:
                 values = [d[i][j] for d in D]
                 theos  = [t[i][j] for t in T]
-                axes[i, j].hist(values, bins=30, label="Data")
-                axes[i, j].hist(theos, bins=30, label="Theory")
+                axes[i, j].hist(values, bins=30)
+                axes[i, j].hist(theos, bins=30)
+                axes[i, j].set_xscale("log")
+                axes[i, j].set_xscale("log")
 
 
 
