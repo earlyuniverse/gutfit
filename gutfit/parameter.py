@@ -76,6 +76,15 @@ class Parameter(object):
     def name(self):
         return self.name_
 
+    @property
+    def isfixed(self): return self.fixed_
+
+    @property
+    def isfree(self): return self.free_
+
+    @property
+    def ismeasurement(self): return self.measurement_
+
 
     def __repr__(self):
         if self.measurement_:

@@ -22,5 +22,10 @@ class TestParameter(unittest.TestCase):
         pl = parameterlist.ParameterList.fromConfigFile("examples/param_card.dat")
         print(pl.sample())
 
+    def testBox(self):
+        pl = parameterlist.ParameterList.fromConfigFile("examples/param_card.dat")
+        box = pl.getBox(["generic_quark_phase_a1", "generic_quark_phase_a2", "model1_mL"])
+        print(pl.sample())
+
 if __name__ == "__main__":
     unittest.main();

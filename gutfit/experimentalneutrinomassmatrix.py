@@ -6,14 +6,16 @@ def matrix_diag3(d1,d2,d3):
 
 # Generic Rotations #
 def matrix_rot23(th23):
-    return np.array([[1.0,          0.0 , 0.0],
-                    [0.0,  np.cos(th23), np.sin(th23)],
-                    [0.0, -np.sin(th23), np.cos(th23)]])
+    s23, c23 = np.sin(th23), np.cos(th23)
+    return np.array([[1,    0,   0],
+                    [ 0,  c23, s23],
+                    [ 0, -s23, c23]])
 
 def matrix_rot12(th12):
-    return np.array([[ np.cos(th12), np.sin(th12), 0.0],
-                    [-np.sin(th12), np.cos(th12), 0.0],
-                    [          0.0,  0.0,         1.0]])
+    s12, c12 = np.sin(th12), np.cos(th12)
+    return np.array([[ c12, s12, 0],
+                    [ -s12, c12, 0],
+                    [    0,   0, 1]])
 
 def matrix_rot13(th13, delta):
     return np.array([[                     np.cos(th13), 0.0, np.sin(th13) * np.exp(-1j * delta)],
