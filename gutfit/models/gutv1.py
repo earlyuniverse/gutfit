@@ -76,7 +76,7 @@ class GUTv1_theory(Model):
     @property
     def val(self):
         """ Implement and return model prediction here using self.x_ as parameter point
-        Convention: self.x_ = [mR, r1, Rer2, self.x_[3]]
+        Convention: self.x_ = [mR, r1, Rer2, Imr2]
         """
         return (t11(self.x_), t12(self.x_), t13(self.x_), t22(self.x_), t23(self.x_), t33(self.x_))
 

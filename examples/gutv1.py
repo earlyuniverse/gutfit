@@ -62,7 +62,7 @@ class GUTV1(Objective):
 if __name__ == "__main__":
 
     pD = {
-            "m1": 0.01 # 1e-5 ... 0.1,
+            "m1": 0.01, # 1e-5 ... 0.1,
             "mR":   [1,20],
             "r1" :  [1,10],
             "Rer2": [0,10],
@@ -77,8 +77,8 @@ if __name__ == "__main__":
 
     mm = Minimiser(oo)
 
-    res = mm.minimise(1)
-    res = mm.minimise(100)
+#    res = mm.minimise(1)
+    res = mm.minimise(600)
     xbest = res["x"]
 
     print("Best fit point at", xbest, "with objective", oo(res["x"]))
