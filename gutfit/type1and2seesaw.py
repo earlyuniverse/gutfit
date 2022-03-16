@@ -94,6 +94,19 @@ class Type1And2SeeSaw(model.Model):
                     )
                 )
 
+#    def MnuTheory(self, a1, a2, a3, b1, b2, th12q, th13q, th23q, deltaq, yu, yc, yt, yd, ys, yb, mL, mR, r1, Rer2, Imr2):
+#        Yd = matrix_Yd(a1, a2, a3, b1, b2, th12q, th13q, th23q, deltaq, yd, ys, yb)
+#        Yu      = matrix_diag3(yu, yc, yt)
+#        r2      = Rer2 + 1j * Imr2
+#        type1p1 = 8.0 * (r2 - 3.0)/(r2-1.0) * Yu
+#        type1p2 = -16.0 /(r1 * (r2 - 1.0)) * Yd
+#        type1p3 = (r1 * (r2 - 1.0))/r2 * Yu @ np.linalg.inv(r1 * Yu - Yd) @ Yu
+#        type1   =  mR * (type1p1 + type1p2 + type1p3)
+#        type2p1 =  Yu / (r2 - 1)
+#        type2p2 = -Yd / (r1 * (r2 - 1))
+#        type2   = mL * (type2p1 + type2p2)
+#        return type1 + type2
+
     def MnuTheory(self, a1, a2, a3, b1, b2, th12q, th13q, th23q, deltaq, yu, yc, yt, yd, ys, yb, mL, mR, r1, Rer2, Imr2):
         Yd = matrix_Yd(a1, a2, a3, b1, b2, th12q, th13q, th23q, deltaq, yd, ys, yb)
         Yu      = matrix_diag3(yu, yc, yt)
@@ -104,10 +117,9 @@ class Type1And2SeeSaw(model.Model):
         type1   =  mR * (type1p1 + type1p2 + type1p3)
         type2p1 =  Yu / (r2 - 1)
         type2p2 = -Yd / (r1 * (r2 - 1))
-        type2   = mL * (type2p1 + type2p2)
-        return type1 + type2
-
-
+        type2   = (type2p1 + type2p2)
+        return (type1/mL) + type2
+        
 if __name__=="__main__":
     E =  Type1And2SeeSaw()
     PL =  parameterlist.ParameterList.fromConfigFile("examples/param_card.dat")
