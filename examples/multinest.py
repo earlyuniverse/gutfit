@@ -55,7 +55,7 @@ def sample(x,E,S,PL,N,pnames):
             overlap([d[0][2] for d in D], [t[0][2] for t in T]),
             overlap([d[1][2] for d in D], [t[1][2] for t in T]),
             overlap([d[1][1] for d in D], [t[1][1] for t in T]),
-            overlap([d[2][2] for d in D], [t[2][2] for t in T])
+            # overlap([d[2][2] for d in D], [t[2][2] for t in T])
             ]
 
     DS = [
@@ -68,11 +68,11 @@ def sample(x,E,S,PL,N,pnames):
             ]
 
     from functools import reduce
-    return reduce(lambda x,y :x*y,[ np.log(1+o) for d,o in zip(DS,OL)])
+    # return reduce(lambda x,y :x*y,[ np.log(1+o) for d,o in zip(DS,OL)]) # Not finding viable points
     # return reduce(lambda x,y :x*y,[ np.exp(-d) for d,o in zip(DS,OL)])
     # return np.prod([ np.log(1+o) for d, o in in zip(DS,OL)])
     # return sum([d   for d,o in zip(DS,OL)]) # works technically
-    # return sum([d*d for d,o in zip(DS,OL)]) # works technically
+    return sum([d*d for d,o in zip(DS,OL)]) # works technically
     # return max([d[0][0] for d in D])-min([t[0][0] for t in T])
 
 #https://stackoverflow.com/questions/13377046/scipy-fill-a-histogram-reading-from-a-db-event-by-event-in-a-loop
@@ -85,11 +85,6 @@ if __name__=="__main__":
     op.add_option("-o", "--output",    dest="OUTPUT",      default="nestout", type=str, help="Prefix for outputs (default: %default)")
     op.add_option("-v", "--debug",     dest="DEBUG",       default=False, action="store_true", help="Turn on some debug messages")
     op.add_option("-q", "--quiet",     dest="QUIET",       default=False, action="store_true", help="Turn off messages")
-    op.add_option("-m", "--model",     dest="MODEL",       default="1DME", help="Selection of of model (default: %default)")
-    op.add_option("--zrange",          dest="ZRANGE",      default="0.1,100,1000", help="Ranges and steps of the evolution variable (default: %default)")
-    op.add_option("--inv",             dest="INVORDERING", default=False, action='store_true', help="Use inverted mass ordering (default: %default)")
-    op.add_option("--loop",            dest="LOOP",        default=False, action='store_true', help="Use loop-corrected Yukawa (default: %default)")
-    op.add_option("--sigma",           dest="SIGMA",       default=1, type=int,              help="Switch to inflate the error in likelihood (default: %default)")
     op.add_option("--mn-seed",         dest="SEED",        default=-1, type=int,              help="Multinest seed (default: %default)")
     op.add_option("--mn-resume",       dest="RESUME",      default=False, action='store_true', help="Resume on previous run.")
     op.add_option("--mn-multi-mod",    dest="MULTIMODE",   default=False, action='store_true', help="Set multimodal to true.")
