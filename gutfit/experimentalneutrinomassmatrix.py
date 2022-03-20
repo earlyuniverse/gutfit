@@ -58,18 +58,18 @@ class ExperimentalNeutrinoMassMatrix(model.Model):
                 )
 
 
-#    def MnuData(self, deltamsq21bf,deltamsq31bf, alpha21, alpha31, th23l, th12l, th13l, deltal, m1):
-#        mnudiag  = matrix_diag3(m1, np.sqrt(m1 * m1 + deltamsq21bf * deltamsq21bf), np.sqrt(m1 * m1 + deltamsq31bf * deltamsq31bf))
-#        Majorana = matrix_diag3(alpha21, alpha31, 0.0)
-#        angle    = matrix_vckm(th12l, th13l, th23l, deltal)
-#        Vpmns    = angle @ Majorana
-#        return np.conj(Vpmns) @ mnudiag @ np.transpose(Vpmns)
     def MnuData(self, deltamsq21bf,deltamsq31bf, alpha21, alpha31, th23l, th12l, th13l, deltal, m1):
-        mnudiag  = matrix_diag3(1.0, np.sqrt(1.0 + deltamsq21bf/(m1* m1)), np.sqrt(1.0 + deltamsq31bf/(m1* m1))
-        Majorana = matrix_diag3(alpha21, alpha31, 0.0)
-        angle    = matrix_vckm(th12l, th13l, th23l, deltal)
-        Vpmns    = angle @ Majorana
-        return np.conj(Vpmns) @ mnudiag @ np.transpose(Vpmns)
+       mnudiag  = matrix_diag3(m1, np.sqrt(m1 * m1 + deltamsq21bf * deltamsq21bf), np.sqrt(m1 * m1 + deltamsq31bf * deltamsq31bf))
+       Majorana = matrix_diag3(alpha21, alpha31, 0.0)
+       angle    = matrix_vckm(th12l, th13l, th23l, deltal)
+       Vpmns    = angle @ Majorana
+       return np.conj(Vpmns) @ mnudiag @ np.transpose(Vpmns)
+    # def MnuData(self, deltamsq21bf,deltamsq31bf, alpha21, alpha31, th23l, th12l, th13l, deltal, m1):
+        # mnudiag  = matrix_diag3(1.0, np.sqrt(1.0 + deltamsq21bf/(m1* m1)), np.sqrt(1.0 + deltamsq31bf/(m1* m1)))
+        # Majorana = matrix_diag3(alpha21, alpha31, 0.0)
+        # angle    = matrix_vckm(th12l, th13l, th23l, deltal)
+        # Vpmns    = angle @ Majorana
+        # return np.conj(Vpmns) @ mnudiag @ np.transpose(Vpmns)
 
 if __name__=="__main__":
     E = ExperimentalNeutrinoMassMatrix()

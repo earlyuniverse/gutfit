@@ -48,7 +48,10 @@ def sample(x,E,S,PL,N,pnames):
         theo = S(p)
         D.append(data)
         T.append(theo)
+    return D, T
 
+
+def measure(D, T):
     OL = [
             overlap([d[0][0] for d in D], [t[0][0] for t in T]),
             overlap([d[0][1] for d in D], [t[0][1] for t in T]),
@@ -143,7 +146,7 @@ if __name__=="__main__":
     def loglike(cube, ndim, nparams):
         PP=[cube[j] for j in range(ndim)]
 
-        val = sample(PP,E,S,PL,N,pnames)
+        val = measure(*sample(PP,E,S,PL,N,pnames))
         print(val)
         if val == 0:
             return -1e101
@@ -169,34 +172,58 @@ if __name__=="__main__":
             seed=opts.SEED,
             outputfiles_basename='%s/GUTFIT'%opts.OUTPUT)
 
-    # # run MultiNest
-    # pymultinest.run(loglike, myprior, len(pnames), outputfiles_basename='out/',
-        # resume = False, verbose = True, n_live_points=20,
-            # evidence_tolerance=0.5,
-            # sampling_efficiency = 0.8
-        # )
     import json
     json.dump(pnames, open('%s/GUTFITparams.json'%opts.OUTPUT, 'w'))
+    json.dump(pnames, open('%s/params.json'%opts.OUTPUT, 'w'))
 
-    # NP = len(pnames)
-    # print("Now analyzing output from {}/GUTFIT.txt".format(opts.OUTPUT))
-    # a = pymultinest.Analyzer(n_params = NP, outputfiles_basename='%s/GUTFIT'%opts.OUTPUT)
-    # a.get_data()
-    # try:
-        # s = a.get_stats()
-    # except:
-        # print("There was an error accumulating statistics. Try increasing the number of iterations, e.g. --mn-iterations -1")
-        # sys.exit(1)
+    NP = len(pnames)
+    print("Now analyzing output from {}/GUTFIT.txt".format(opts.OUTPUT))
+    a = pymultinest.Analyzer(n_params = NP, outputfiles_basename='%s/GUTFIT'%opts.OUTPUT)
+    a.get_data()
+    try:
+        s = a.get_stats()
+    except:
+        print("There was an error accumulating statistics. Try increasing the number of iterations, e.g. --mn-iterations -1")
+        sys.exit(1)
 
-    # from collections import OrderedDict
-    # resraw = a.get_best_fit()["parameters"]
-    # PP=OrderedDict.fromkeys(pnames)
-    # for num, pname in enumerate(pnames): PP[pname] = resraw[num]
-    # out="# Best fit point:\n"
-    # for k in PP: out+= "%s %.16f\n"%(k,PP[k])
-    # with open("%sconfig.best"%a.outputfiles_basename, "w") as f: f.write(out)
+    from collections import OrderedDict
+    resraw = a.get_best_fit()["parameters"]
+    D, T = sample(resraw ,E,S,PL,10*N, pnames)
+    bestval=measure(D,T)
+    PP=OrderedDict.fromkeys(pnames)
+    for num, pname in enumerate(pnames): PP[pname] = resraw[num]
+    out="# Best fit point (measure: {}):\n".format(bestval)
+    for k in PP: out+= "%s %.16f\n"%(k,PP[k])
+    with open("%sconfig.best"%a.outputfiles_basename, "w") as f: f.write(out)
+    print(out)
+
+    print("Measure at best fit point is {}".format(bestval))
+    # from IPython import embed
+    # embed()
+
+    from matplotlib import pyplot as plt
+    import matplotlib as mpl
+    plt.style.use('ggplot')
+
+    plt.clf()
 
 
+    fig, axes = plt.subplots(figsize=(10, 10), sharex=False, sharey=False, ncols=3, nrows=3)
+    plt.title("Measure: {}".format(bestval))
+    for i in range(3):
+        for j in range(3):
+            if i<j:
+                axes[i, j].axis('off')
+            else:
+                values = [d[i][j] for d in D]
+                theos  = [t[i][j] for t in T]
+                axes[i, j].hist(values, bins=30)
+                axes[i, j].hist(theos, bins=30)
+                axes[i, j].set_xscale("log")
+                axes[i, j].set_xscale("log")
+
+
+    plt.savefig("{}/GUTFITplot.pdf".format(opts.OUTPUT))
 
 
     # from scipy import optimize
