@@ -12,9 +12,6 @@ setup(
     'numpy',
     'scipy',
     'matplotlib',
-    # 'progressbar'
-    # 'numba',
-    # 'mpi4py'
   ],
   python_requires='>3.6.0',
   # scripts=['bin/uls-calc', 'bin/uls-scan', 'bin/uls-nest', 'bin/uls-models'],

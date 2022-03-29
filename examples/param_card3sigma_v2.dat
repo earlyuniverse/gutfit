@@ -1,14 +1,12 @@
-# Model 1 parameters. Parameters with prefix "data_"
-# are measured and can vary within a range. Parameters with prefix "model1_"
+# Model 2 parameters. Parameters with prefix "data_"
+# are measured and can vary within a range. Parameters with prefix "model2_"
 # are model parameters. Data from PDG + nuFIT. Note that angles are
 # given in radians and mass squared differences of neutrinos are in GeV^2.
 # all masses are in GeV.
-# In this card we scan masses in log10(mass [GeV])
 
 generic_quark_phase_a1 0.0 6.28319
 generic_quark_phase_a2 0.0 6.28319
-generic_quark_phase_b1 0.0 6.28319
-generic_quark_phase_b2 0.0 6.28319
+generic_quark_phase_a3 0.0 6.28319
 data_quark_th12        0.227364041657301 0.00142069801112338 0.00142069801112338 0.00426209403337015 0.00426209403337015
 data_quark_th13        0.00314508331209378 0.000490437519810407 0.000490437519810407 0.00147131255943122 0.00147131255943122
 data_quark_th23        0.0358490628359635 0.00670206432765823 0.00670206432765823 0.0201061929829747 0.0201061929829747
@@ -19,9 +17,10 @@ data_quark_yt          0.534    0.0341    0.0341    0.1023    0.1023
 data_quark_yd          4.81e-06    1.06e-06    1.06e-06    3.18e-06    3.18e-06
 data_quark_ys          0.00009520    0.0000103   0.0000103    0.0000309   0.0000309
 data_quark_yb          0.0069500000000000000    0.000175    0.000175    0.000525    0.000525
-model1_mR             -4.0 0.0
-model1_Rer2            0. 10.
-model1_Imr2            -2.0 2.0
+model2_mR              1e-4    1.
+model2_r1             -0.1     0.1
+model2_r2             -100.0   100.0
+model2_cnu 	      -10.0    10.0 
 data_neutrino_deltamsq21bf 7.42e-23
 data_neutrino_deltamsq31bf 2.514e-21
 data_neutrino_alpha21 0.0 6.28319
@@ -30,5 +29,5 @@ data_neutrino_th23  0.8552113334772210    0.048869219055841200   0.1692969374434
 data_neutrino_th12  0.5836381018669040    0.04223696789826280    0.03787364476827700   0.04223696789826280    0.03787364476827700
 data_neutrino_th13  0.14957471689591400   0.006981317007977320   0.006457718232379020  0.006981317007977320   0.006457718232379020
 data_neutrino_delta 3.4033920413889400    3.857177646907470      1.5533430342749500    3.857177646907470      1.5533430342749500
-data_neutrino_m1 -14 -10
+data_neutrino_m1 1e-14 1e-10
 
