@@ -52,7 +52,7 @@ def sample(x,E,S,PL,N,pnames):
 
 
 def measure(D, T):
-    OL = [
+     OL = [
             overlap([d[0][0] for d in D], [t[0][0] for t in T]),
             overlap([d[0][1] for d in D], [t[0][1] for t in T]),
             overlap([d[0][2] for d in D], [t[0][2] for t in T]),
@@ -61,17 +61,43 @@ def measure(D, T):
             overlap([d[2][2] for d in D], [t[2][2] for t in T])
             ]
 
-    DS = [
-            abs(np.mean([d[0][0] for d in D]) - np.mean([t[0][0] for t in T])),
-            abs(np.mean([d[0][1] for d in D]) - np.mean([t[0][1] for t in T])),
-            abs(np.mean([d[0][2] for d in D]) - np.mean([t[0][2] for t in T])),
-            abs(np.mean([d[1][2] for d in D]) - np.mean([t[1][2] for t in T])),
-            abs(np.mean([d[1][1] for d in D]) - np.mean([t[1][1] for t in T])),
-            abs(np.mean([d[2][2] for d in D]) - np.mean([t[2][2] for t in T]))
-            ]
+#    DS = [
+#            abs(np.mean([d[0][0] for d in D]) - np.mean([t[0][0] for t in T])),
+#            abs(np.mean([d[0][1] for d in D]) - np.mean([t[0][1] for t in T])),
+#            abs(np.mean([d[0][2] for d in D]) - np.mean([t[0][2] for t in T])),
+#            abs(np.mean([d[1][2] for d in D]) - np.mean([t[1][2] for t in T])),
+#            abs(np.mean([d[1][1] for d in D]) - np.mean([t[1][1] for t in T])),
+#            abs(np.mean([d[2][2] for d in D]) - np.mean([t[2][2] for t in T]))
+#            ]
+       
+     DS = []
+     a  = np.mean([d[0][0] for  d in D])
+     b  = np.mean([t[0][0] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
+     a  = np.mean([d[0][1] for  d in D])
+     b  = np.mean([t[0][1] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
+     a  = np.mean([d[0][2] for  d in D])
+     b  = np.mean([t[0][2] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
+     a  = np.mean([d[1][2] for  d in D])
+     b  = np.mean([t[1][2] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
+     a  = np.mean([d[1][1] for  d in D])
+     b  = np.mean([t[1][1] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
+     a  = np.mean([d[2][2] for  d in D])
+     b  = np.mean([t[2][2] for t in T])
+     d  = abs((a - b)/(a + b))
+     DS.append(d)
 
-    from functools import reduce
-    return sum([d*d for d,o in zip(DS,OL)]) # works technically
+     from functools import reduce
+     return sum([d*d for d,o in zip(DS,OL)]) # works technically
 
 #https://stackoverflow.com/questions/13377046/scipy-fill-a-histogram-reading-from-a-db-event-by-event-in-a-loop
 import numpy as np
@@ -201,8 +227,8 @@ if __name__=="__main__":
                 theos  = [t[i][j] for t in T]
                 axes[i, j].hist(values, bins=30)
                 axes[i, j].hist(theos, bins=30)
-                axes[i, j].set_xscale("log")
-                axes[i, j].set_xscale("log")
+#                axes[i, j].set_xscale("log")
+#                axes[i, j].set_yscale("log")
 
 
     plt.savefig("{}/GUTFITplot.pdf".format(opts.OUTPUT))
