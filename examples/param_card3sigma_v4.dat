@@ -1,8 +1,8 @@
 # Model 4 parameters. Parameters with prefix "data_"
-# are measured and can vary within a range. Parameters with prefix "model3_"
+# are measured and can vary within a range. Parameters with prefix "model4_"
 # are model parameters. Data from PDG + nuFIT. Note that angles are
 # given in radians and mass squared differences of neutrinos are in GeV^2.
-# all masses are in GeV. Here we can in log10(mass [GeV]), also log10(r2),  log10(ce) and log10(cnu)
+# all masses are in GeV. Here we can in log10(mass [GeV]), also log10(r1),log10(r2),  log10(ce) and log10(cnu)
 
 generic_quark_phase_a1 0.0 6.28319
 generic_quark_phase_a2 0.0 6.28319
@@ -32,5 +32,5 @@ data_neutrino_th23  0.8552113334772210    0.048869219055841200   0.1692969374434
 data_neutrino_th12  0.5836381018669040    0.04223696789826280    0.03787364476827700   0.04223696789826280    0.03787364476827700
 data_neutrino_th13  0.14957471689591400   0.006981317007977320   0.006457718232379020  0.006981317007977320   0.006457718232379020
 data_neutrino_delta 3.4033920413889400    3.857177646907470      1.5533430342749500    3.857177646907470      1.5533430342749500
-data_neutrino_m1 -14.0  -10.0
+data_neutrino_m1 -16.0  -11.0
 

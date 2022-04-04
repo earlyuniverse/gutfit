@@ -1,0 +1,11 @@
+# from Bowen's arc_chi_*.dat file 4th entry in column
+generic_quark_phase_a1 4.028007730914512
+generic_quark_phase_a2 1.3934195190967658
+model4_mR -14.5328090242264629
+model4_r1 -1.77014
+model4_r2 1.66522
+model4_cnu 0.276731
+model4_ce 0.2152562622996843
+data_neutrino_alpha21 0.0243711562435906
+data_neutrino_alpha31 4.9084177327501939
+data_neutrino_m1 -12.1592

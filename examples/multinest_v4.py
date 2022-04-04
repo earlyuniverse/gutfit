@@ -22,7 +22,11 @@ def plotting(D, T, measure, fout):
                 axes[i, j].hist(values, bins=30)
                 axes[i, j].hist(theos, bins=30)
                 axes[i, j].set_xscale("log")
-                axes[i, j].set_xscale("log")
+                axes[i, j].set_yscale("log")
+#                from IPython import embed
+#                embed()
+#                exit(0)
+#                axes[i, j].set_xscale("log")
 
 
     plt.savefig(fout)
@@ -161,11 +165,10 @@ if __name__=="__main__":
 
 
 
-
     import sys
     E  = ExperimentalNeutrinoMassMatrix()
     S  = Type1And2SeeSaw_v4()
-    PL =  parameterlist.ParameterList.fromConfigFile(args[0])#"examples/param_card.dat")
+    PL = parameterlist.ParameterList.fromConfigFile(args[0])#"examples/param_card.dat")
     N  = 1000 # number of samples of PL
     
     if len(args) > 1:
